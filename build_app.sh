@@ -55,7 +55,7 @@ function build_app()
         echo "warning: no directory named $WRF_BASE/src/${DIR}"
     fi
 
-    for dep in ${DEP[@]}; do        # soruce dep envs
+    for dep in ${DEP[@]}; do        # soruce dep envs,get APP_ROOT env variables.
         source $appsdir/$dep.env
     done
     . $appsdir/${1}.env
@@ -70,6 +70,7 @@ function build_app()
     fi
 }
 
+#args must have at least one,such as 'all'.
 if [ $# -lt 1 ]
 then
     echo "${#} arguments."
@@ -83,6 +84,7 @@ while [ $counter -lt $nofargs ]; do
         all|ALL)
             for app in ${app_list[@]};
             do
+				#build_app func is core
                 build_app ${app}
             done
             ;;

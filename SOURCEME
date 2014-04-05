@@ -1,4 +1,4 @@
-# directory where installation takes place
+# Usage: source SOURCEME # directory where installation takes place
 export WRF_BASE=~/wrf
 
 # | intel  | for intel compilers     |
@@ -21,7 +21,14 @@ export dep_root=$compiler                 # where to install common dependencies
 
 #------- NO NEED TO EDIT BELOW ----------
 # figure out absolute path of our repository; and bind it SCRIPTS_DIR
-export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
+# You must ensure execute in bash,not other shell
+if [ -n "$ZSH_NAME" ]; then
+	echo "Now I'm in zsh"
+	echo "Please source me in bash shel"
+	return 2
+else
+	[ -n "$BASH_SOURCE" ] && export SCRIPTS_DIR=$(cd `dirname $BASH_SOURCE`; pwd)
+fi
 
 if [  "$0" == "$BASH_SOURCE" ]; then
     echo "--: please source me instead of running as shown below :--"

@@ -1,8 +1,9 @@
 #!/bin/bash
 # download apps from env
 
+#echo message with color
 RESET='\e[0m'
-RED="\E[31m"
+RED='\E[31m'
 GREEN='\E[32m'
 
 function usage()
@@ -75,21 +76,24 @@ function download_extract()
     cd $BASE/src
 
     if [ ! -z $URL ]; then
+		#download
         download_package $URL
     else
         echo -e "$RED unknown app \"$package\" $RESET"
         usage $0
         exit 64
     fi
+	#if download success, exectue 'extract_package'
     [ $? == 0 ] && extract_package
     cd -
 }
 
 # ------------------------------------------------------
+#${parameter:-default} if parameter unset, use default
 export BASE=${BASE:-$WRF_BASE}
 echo $BASE
 
-# check needed environment variables are present or not
+# check needed environment variables are present or not(SOURCEME has set)
 env_error=24
 if [ -z $BASE ]; then
     echo BASE variable is empty
@@ -107,8 +111,8 @@ mkdir -p $BASE/src      # Setup source directory
 
 apps=()
 for envfile in `find $appsdir -maxdepth 1 -type f  -name "*.env"` ; do
-    temp="${envfile##*/}" # strip out path name
-    app="${temp%.[^.]*}" # strip out ".env"
+    temp="${envfile##*/}" # strip out path name, max match '*/' from $envfile
+    app="${temp%.[^.]*}" # strip out ".env", delete suffix
     apps=(${apps[@]} ${app})
 done
 

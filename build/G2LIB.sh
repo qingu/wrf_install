@@ -1,7 +1,7 @@
 export CFLAGS="$CFLAGS -DUSE_JPEG2000 -DUSE_PNG"
 
 ./configure --prefix=$G2LIB_ROOT \
-    --with-jasper
+    --with-jasper                \
     | tee ${APP}.${COMP}.config
 make clean 2>&1 | tee ${APP}.${COMP}.clean
 make 2>&1 | tee ${APP}.${COMP}.make
