@@ -5,6 +5,7 @@
     --with-zlib=$ZLIB_ROOT \
     --with-szlib=$SZIP_ROOT \
     --with-jpeg=$JPEG_ROOT \
+	--disable-shared \
     --with-pic | tee ${APP}.${COMP}.config
 
 make clean 2>&1 | tee ${APP}.${COMP}.clean
