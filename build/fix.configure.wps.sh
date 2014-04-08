@@ -21,5 +21,7 @@ sed -i "s/^COMPRESSION_INC[ \t]*= /& -I\/$COMP_INC -I\/$COMP_INC\/jasper/g" $FIL
 
 
 # -cpp
-sed -i 's/-ffree-form/& -cpp/g' $FILE
-sed -i 's/-ffixed-form/& -cpp/g' $FILE
+#sed -i 's/-ffree-form/& -cpp/g' $FILE
+#sed -i 's/-ffixed-form/& -cpp/g' $FILE
+sed -i 's/^FFLAGS.*/& -cpp/g' $FILE
+sed -i 's/^F77FLAGS.*/& -cpp/g' $FILE

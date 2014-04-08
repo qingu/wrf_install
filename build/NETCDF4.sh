@@ -1,16 +1,15 @@
-export CFLAGS="-I${HDF5_ROOT}/include" LDFLAGS="-L${HDF5_ROOT}/lib $CPPFLAGS"
+export LIBS="-lhdf5_hl -lhdf5 -lz -lcurl"
 
 ./configure \
     --prefix=$NETCDF4_ROOT \
 	--disable-shared \
-#    --enable-fortran \
     --enable-udunits \
-    --with-zlib=$ZLIB_ROOT \
-    --with-szlib=$SZIP_ROOT \
-    --with-hdf5=$HDF5_ROOT \
     --with-pic \
     --with-libcf \
+	--disable-cxx \
     --disable-dap | tee ${APP}.${COMP}.config
+
+#    --enable-fortran \
 
 make clean 2>&1 | tee ${APP}.${COMP}.clean
 make 2>&1 | tee ${APP}.${COMP}.make
